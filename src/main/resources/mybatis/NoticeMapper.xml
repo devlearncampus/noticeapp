@@ -26,7 +26,7 @@
     <!--  수정   -->
     <update id="update" parameterType="Notice">
         update notice set title=#{title}, writer=#{writer}, content=#{content}
-        where notice_id=#{notice_id}
+        where notice_id=#{noticeId}
     </update>
 
     <!--  삭제  -->

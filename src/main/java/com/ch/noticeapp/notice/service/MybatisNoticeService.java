@@ -89,7 +89,41 @@ public class MybatisNoticeService {
             throw new NoticeException(NoticeErrorCode.NOTICE_NOT_FOUND);
         }
     }
+
+    //한건 수정하기
+    public Notice update(Notice notice){
+        //바로 수정하지 말고, 넘겨받은 정보를 이용하여 정말로 그 대상이 존재하는지 체크
+        try {
+            Notice found = noticeMapper.findById(notice.getNoticeId());
+            if (found == null) {//글이 존재하지 않는다면, 수정은 실패로 처리 ...
+                throw new NoticeException(NoticeErrorCode.NOTICE_NOT_FOUND);
+            }
+
+            //위의 예외를 만나지 않았다면 수정을 시도
+            int affected = noticeMapper.update(notice);
+            if (affected != 1) {
+                throw new NoticeException(NoticeErrorCode.NOTICE_UPDATE_FAIL);
+            }
+            return noticeMapper.findById(notice.getNoticeId());
+        }catch(Exception e){
+            e.printStackTrace();// 개발자가 원인 분석을 하기 위해 기록 남기기..
+            throw new NoticeException(NoticeErrorCode.NOTICE_UPDATE_FAIL);
+        }
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

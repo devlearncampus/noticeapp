@@ -62,7 +62,10 @@ public class MybatisNoticeController {
 
     //글한건 수정 요청 처리
     @PutMapping("/{noticeId}")
-    public ResponseEntity<Notice> update(){
-        return null;
+    public ResponseEntity<Notice> update(@PathVariable Long noticeId,@RequestBody Notice notice){
+        log.debug("notice is {}", notice);
+        notice.setNoticeId(noticeId);//pk값 대입
+
+        return ResponseEntity.ok(noticeService.update(notice));
     }
 }
