@@ -2,5 +2,33 @@ spring:
   application:
     name: noticeapp
 
+  datasource:
+    url: jdbc:mysql://localhost:3306/kiosk?useSSL=false&chararcterEncoding=UTF-8
+    username: boot
+    password: "1234"
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    database-platform: org.hibernate.dialect.MySQLDialect
+
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
+        format_sql: true
+    open-in-view: false
+
+logging:
+  level:
+    root: info
+    com.ch.noticeapp: debug
+
+    org.hibernate.SQL: debug
+    org.hibernate.orm.jdbc.bind: trace
+
+
 server:
   port: 9999
+
+#yaml 을 이용하면,properties 파일보다 코드량이 적어지고 중복 방지

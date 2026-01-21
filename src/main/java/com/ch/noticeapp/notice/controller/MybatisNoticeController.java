@@ -14,7 +14,7 @@ import java.util.List;
 /*공지게시판 요청을 처리하는 컨트롤러*/
 @Slf4j
 @RestController //이것을 쓰면 @ResponseBody를 명시할 필요가 없다
-@RequestMapping("/api/notices")
+//@RequestMapping("/api/notices")
 public class MybatisNoticeController {
 
     private final MybatisNoticeService noticeService;
