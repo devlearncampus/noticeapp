@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.CreatedDate;
 
 import java.time.LocalDateTime;
 
@@ -52,7 +53,7 @@ public class Notice {
     private LocalDateTime regdate;
 
     @Column(name="hit")
-    private Integer hit;
+    private int hit;
 
 
     //개발자가 추후 데이터 1건을 담기 위해 사용될 생성자 정의
@@ -68,9 +69,8 @@ public class Notice {
         this.content=content;
     }
 
-    public void increateHit(){
-        if(this.hit==null)this.hit=0;
-        hit+=1;
+    public void increaseHit() {
+        hit += 1;
     }
 
 }

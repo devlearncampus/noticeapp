@@ -3,12 +3,12 @@ package com.ch.noticeapp.notice.controller;
 import com.ch.noticeapp.notice.dto.request.RequestNotice;
 import com.ch.noticeapp.notice.dto.response.ResponseNotice;
 import com.ch.noticeapp.notice.service.JpaNoticeService;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController // 모든 요청 처리 메서드에 @ResponseBody를 붙일 필요가 없다
 @RequestMapping("/api/notices")
@@ -23,6 +23,25 @@ public class JpaNoticeController {
     public ResponseEntity<ResponseNotice> regist(@RequestBody RequestNotice request){
         ResponseNotice created =jpaNoticeService.regist(request);
         return ResponseEntity.ok(created);
+    }
+
+    //목록 요청 처리
+    @GetMapping
+    public ResponseEntity<List<ResponseNotice>> getList(){
+        return ResponseEntity.ok(jpaNoticeService.getList());
+    }
+
+    //수정 요청 처리
+    @PutMapping("/{noticeId}")
+    public ResponseEntity<ResponseNotice> update(@PathVariable Long noticeId, @RequestBody RequestNotice request){
+        return ResponseEntity.ok( jpaNoticeService.update(noticeId, request));
+    }
+
+    //삭제 요청 처리
+    @DeleteMapping("/{noticeId}")
+    public ResponseEntity<Void> delete(@PathVariable Long noticeId){
+         jpaNoticeService.delete(noticeId);
+        return ResponseEntity.noContent().build(); //204 no content
     }
 }
 
