@@ -43,6 +43,7 @@ public class JpaNoticeController {
          jpaNoticeService.delete(noticeId);
         return ResponseEntity.noContent().build(); //204 no content
     }
+
 }
 
 
